@@ -1,0 +1,21 @@
+    #include <bits/stdc++.h>
+    using namespace std;
+     
+     
+    int main(){
+        int n;cin>>n;
+        int a,cnt0=0,cnt1=0,m0=-1;
+        while(n--){
+            cin>>a;
+            if(a==1){
+                cnt1++;
+                if(cnt0>0) cnt0--;
+            }
+            else{
+                cnt0++;
+                if(m0<cnt0) m0=cnt0;
+            }
+        }
+        cout<<cnt1+m0;
+        return 0;
+    }    
