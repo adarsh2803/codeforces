@@ -1,0 +1,30 @@
+    #include <bits/stdc++.h>
+    using namespace std;
+    typedef long long ll;
+     
+    int main(){
+       string s;ll t;
+       cin>>s>>t;
+       ll n=s.size();
+       ll a[n];
+       a[0]=0;
+       for(int i=1;i<n;i++){
+           if(s[i]==s[i-1]) a[i]=a[i-1]+1;
+           else a[i]=a[i-1];
+       }
+     
+       ll l,r;
+       while(t--){
+           cin>>l>>r;
+           cout<<a[r-1]-a[l-1]<<endl;
+       }
+       
+      
+      return 0;
+    }
+    -------------------------------------------
+    simple question just observing a pattern in a string
+    and giving a corresponding values to each index in extra array a[]
+    and two no. l,r are given 
+    finding out the differnce bw these two places 
+    a[r-1]-a[l-1]=
