@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+   int n;cin>>n;
+   int dp[n][3],a[n];
+   //we want to find min . days of relax , so we have to initialise with some big value 1000 is enough for this question
+   for(int i=0;i<n;i++)
+    dp[i][1]=dp[i][0]=dp[i][2]=1000;
+   
+   for(int i=0;i<n;i++) cin>>a[i];
+   //we can always relax , so we can relax on day 0 , hence "1" day of relax
+   dp[0][0]=1;  // "0" mean relax
+   // if we work on day 0 , we have not relaxed , so "0" day of relax
+   if(a[0]==1 || a[0]==3) dp[0][1]=0; // "1 " means contest
+   if(a[0]==2 || a[0]==3) dp[0][2]=0; // "2" means gym
+   
+   for(int i=1;i<n;i++){
+       // prev. day we can rest , gym ,do contest , so we can come from any path 
+       //so "1" for today +(plus) min days we relaxed , prev. day 
+       dp[i][0]= 1+min(dp[i-1][0],min(dp[i-1][1],dp[i-1][2]));
+       
+       //prev. day we cannot have contest , we can either have gym or rest yesterday
+       //so from these two diff. cases we might of yesterday come to contest , so we will take min. of days of rest from 
+       // gym or rest of prev. day
+       if(a[i]==1 || a[i]==3) dp[i][1]=min(dp[i-1][0],dp[i-1][2]);
+       
+       //prev. day we cannot have gym , so we can have contest or rest
+       // so for today's gym , we can come from (prev. day ) contest or rest case
+       // but not from  gym as we are doing it today , and two days consecutive same work not allowed
+       if(a[i]==2 || a[i]==3) dp[i][2]=min(dp[i-1][0],dp[i-1][1]);
+   } 
+   
+   cout<<min(dp[n-1][0],min(dp[n-1][1],dp[n-1][2]));
+   //again we dont know the last day , we can have rest , gym , contest , so min . can be achieved from
+   // any cases, so we take the min. of days of rest from all cases of rest , gym , contest .
+
+    return 0;
+}    
