@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll l,r,n;
+ll v[100001];
+ll v1[100001];
+ 
+int main(){
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+    cin>>n;
+  for(int i=0;i<n;i++) {cin>>v[i];v1[i]=v[i];}
+  sort(v1,v1+n);
+  
+  ll sum[100001]={0},sum1[100001]={0};
+  sum[0]=v[0],sum1[0]=v1[0];
+  for(int i=1;i<n;i++){
+      sum[i]=sum[i-1]+v[i];
+      sum1[i]=sum1[i-1]+v1[i];
+  }
+  ll t; cin>>t;
+  while(t--){
+      ll c;
+      cin>>c>>l>>r;
+      l--,r--;
+      if(c==1) cout<<(sum[r]-sum[l]+v[l])<<endl;
+      else   cout<<(sum1[r]-sum1[l]+v1[l])<<endl;
+    }
+  
+ return 0;  
+}
+========================================================================
+k=no. of test case , n= no. of elements
+question was simple , we were given two index , we wan to calculate sum
+bw these 2 no. so , instead of calculating the sum in each case using a loop 0(n.k)
+calculate sum earlier of each index using sum[i]=sum[i-1]+a[i];
+and to calculate the sum bw 2 no. its value will be equal to the diff. 
+of sum[r]-sum[l]+a[l] // including that no.
+time complexity 0(k);
+===============================================================================
