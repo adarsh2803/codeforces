@@ -1,0 +1,51 @@
+    #include <bits/stdc++.h>
+    using namespace std;
+    typedef long long ll;
+    ll a[1000007];
+    bool prime[10000007];
+     
+    void isprime(){
+        prime[0]=0;prime[1]=0;
+        for(ll p=2;p<10000007;p++){
+            if(prime[p]==1){
+                for(ll i=p*p ;i<10000007;i+=p) prime[i]=0;
+            }
+        }
+        
+    }
+     
+    int ps(ll n){
+        double x=sqrt(n);
+        if(x == (int)x ){ return 1;}
+        else {return 0;}
+    }
+     
+    int main(){
+        cin.tie(0);
+        ios::sync_with_stdio(false);
+        memset(prime ,1, sizeof(prime));
+        isprime();
+        ll t;cin>>t;
+        for(int i=0;i<t;i++) {
+            cin>>a[i];
+           ll n=a[i];
+           ll m=sqrt(n);
+           if(n==4) cout<<"YES"<<endl;
+           else if (n%2==0) cout<<"NO"<<endl;
+           else if(ps(n) && prime[m]) cout<<"YES"<<endl;
+           else cout<<"NO"<<endl;
+        
+    }
+    return 0;
+    }
+    
+   =========================================================================
+   the main concept in this question was to find no. having 3 distinct factors
+   this is only possible for those no. who are prime and the resultant no. 
+   will be prime*prime (1 ,prime ,prime*prime as factors)
+   1. one approach can be repeatly call primeNochecker function whether a no.
+   is prime or not
+   OR 
+   2. 1st calculate all no. which are prime and then when ever you need , just call it
+   using array , it would be very very fast
+  
